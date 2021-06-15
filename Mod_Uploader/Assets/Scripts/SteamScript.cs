@@ -108,7 +108,9 @@ public class SteamScript : MonoBehaviour
 #if UNITY_EDITOR
 		modPath.text = path = EditorUtility.OpenFolderPanel("UploadMod","","");
 #else 
-		var FileDialog = new OpenFileDialog();
+		OpenFileDialog FileDialog = new OpenFileDialog();
+		FileDialog.FileName = path;
+		//modPath.text = FileDialog.FileName;
 		FileDialog.ShowDialog();
 		modPath.text = path = FileDialog.FileName;
 #endif
@@ -215,5 +217,13 @@ public class SteamScript : MonoBehaviour
 	{
 		Debug.Log("AddDependencyResult: " + pCallback.m_eResult);
 		
+	}
+	public void QuitApp()
+	{
+#if UNITY_EDITOR
+		UnityEditor.EditorApplication.isPlaying = false;
+#else
+		UnityEngine.Application.Quit();
+#endif
 	}
 }
