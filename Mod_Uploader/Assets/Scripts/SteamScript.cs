@@ -26,6 +26,7 @@ public class SteamScript : MonoBehaviour
 	modInfo modinfo;
 	private CallResult<CreateItemResult_t> m_CreateItemResult;
 	private CallResult<SubmitItemUpdateResult_t> m_itemUpdateResult;
+	private CallResult<AddUGCDependencyResult_t> m_addDependecyResult;
 
 	[SerializeField] TMP_InputField modPath;
 	[SerializeField] TMP_InputField modTitle;
@@ -52,6 +53,7 @@ public class SteamScript : MonoBehaviour
 		if (SteamManager.Initialized) {
 			m_CreateItemResult = CallResult<CreateItemResult_t>.Create(CreateItemId);
 			m_itemUpdateResult = CallResult<SubmitItemUpdateResult_t>.Create(CheckItemUpdateResult);
+			m_addDependecyResult = CallResult<AddUGCDependencyResult_t>.Create(CheckDependencyResult);
 			appId.m_AppId = 1307550;
 			
 		}
@@ -136,6 +138,11 @@ public class SteamScript : MonoBehaviour
 		SteamAPICall_t handle = SteamUGC.CreateItem(appId,EWorkshopFileType.k_EWorkshopFileTypeCommunity);
 		m_CreateItemResult.Set(handle);
 	}
+	private void SteamAddDependency()
+	{
+		SteamAPICall_t handle = SteamUGC.CreateItem(appId,EWorkshopFileType.k_EWorkshopFileTypeCommunity);
+		m_CreateItemResult.Set(handle);
+	}
 
 	private void SteamUpLoadItem()
 	{
@@ -160,6 +167,7 @@ public class SteamScript : MonoBehaviour
 		{
 			Debug.Log("SetItemContent: " + "OK");
 		}
+		
 		// if(SteamUGC.SetItemPreview(itemUpdateHandle,"C:/test/New Unity Project/modId/slime_mod/mono5.png"))
 		// {
 		// 	Debug.Log("SetItemPreview: " + "OK");
@@ -169,6 +177,8 @@ public class SteamScript : MonoBehaviour
 		NeedUpLoad = false;
 		SteamAPICall_t ItemUpdateResult = SteamUGC.SubmitItemUpdate(itemUpdateHandle, null);
 		m_itemUpdateResult.Set(ItemUpdateResult);
+		SteamAPICall_t addDependecyResult = SteamUGC.AddDependency(PublishedFileId,new PublishedFileId_t(2491629880));
+		m_addDependecyResult.Set(addDependecyResult);
 	}
 	private void CreateItemId(CreateItemResult_t pCallback, bool bIOFailure) {
 		
@@ -199,6 +209,11 @@ public class SteamScript : MonoBehaviour
 	private void CheckItemUpdateResult(SubmitItemUpdateResult_t pCallback, bool bIODailure)
 	{
 		Debug.Log("UpdateItemResult: " + pCallback.m_eResult);
+		
+	}
+	private void CheckDependencyResult(AddUGCDependencyResult_t pCallback, bool bIODailure)
+	{
+		Debug.Log("AddDependencyResult: " + pCallback.m_eResult);
 		
 	}
 }
