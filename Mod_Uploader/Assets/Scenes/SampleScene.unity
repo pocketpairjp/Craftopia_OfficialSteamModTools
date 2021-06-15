@@ -991,7 +991,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 282985672}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 928873295}
+        m_TargetAssemblyTypeName: SteamScript, Assembly-CSharp
+        m_MethodName: CreateAndUpload
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &282985672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1273,7 +1285,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 521720692}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 928873295}
+        m_TargetAssemblyTypeName: SteamScript, Assembly-CSharp
+        m_MethodName: SelectFolder
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &521720692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1729,7 +1753,7 @@ GameObject:
   - component: {fileID: 928873296}
   - component: {fileID: 928873295}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: ModUpLoader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1747,9 +1771,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 895ffb3b2e59aaa4eb04a3ca7ae86152, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  modPath: {fileID: 675687191}
-  modTitle: {fileID: 2137032058}
-  modDescription: {fileID: 960169871}
+  modPath: {fileID: 258934856}
+  modTitle: {fileID: 13057937}
+  modDescription: {fileID: 121889529}
 --- !u!4 &928873296
 Transform:
   m_ObjectHideFlags: 0

@@ -5,11 +5,12 @@ using UnityEditor;
 using Steamworks;
 using System.IO;
 using System;
-using System.Windows;
+using System.Windows.Forms;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Reflection;
 using UnityEngine.UI;
+using TMPro;
 
 public class SteamScript : MonoBehaviour
 {
@@ -26,24 +27,25 @@ public class SteamScript : MonoBehaviour
 	private CallResult<CreateItemResult_t> m_CreateItemResult;
 	private CallResult<SubmitItemUpdateResult_t> m_itemUpdateResult;
 
-	[SerializeField] InputField modPath;
-	[SerializeField] InputField modTitle;
-	[SerializeField] InputField modDescription;
+	[SerializeField] TMP_InputField modPath;
+	[SerializeField] TMP_InputField modTitle;
+	[SerializeField] TMP_InputField modDescription;
 	bool findModInfo;
 	string path = "";
 	string modInfoPath = "";
 	bool findModId = false;
+	bool NeedUpLoad = false;
 	//string modFilePath = path+"/modId1.txt";
 	PublishedFileId_t PublishedFileId;
 	private AppId_t appId;
 	private void Start() {
-		modPath.text = path = EditorUtility.OpenFolderPanel("UploadMod","","");
+		//modPath.text = path = EditorUtility.OpenFolderPanel("UploadMod","","");
 		modinfo = new modInfo ();
-		if( modPath.text != "" && File.Exists(path))
-		{
-			fideModInfo();
+		// if( modPath.text != "" && File.Exists(path))
+		// {
+		// 	fideModInfo();
 		
-		}
+		// }
 		
 	}
 	private void OnEnable() {
@@ -77,8 +79,11 @@ public class SteamScript : MonoBehaviour
 					findModId = true;
 				}
 			}
-			modinfo.title = info[1];
-			modinfo.modType = info[2];
+			if(info.Length == 3)
+			{
+				modinfo.title = info[1];
+				modinfo.modType = info[2];
+			}
 
 			findModInfo = true;
 		}
@@ -89,64 +94,82 @@ public class SteamScript : MonoBehaviour
 	}
 	private void Update() {
 		
-		modinfo.title = modTitle.text;
-		if(Input.GetKeyDown(KeyCode.Return) && !findModInfo)
+		if(findModId && NeedUpLoad)
 		{
-			modPath.text = path = EditorUtility.OpenFolderPanel("UploadMod","","");
-			if( modPath.text != "" )
-			{
-				fideModInfo();
-			}
+			SteamUpLoadItem();
 		}
-
-		if(Input.GetKeyDown(KeyCode.Return) && findModInfo && SteamManager.Initialized) {
-			
-			
-			if(findModId)
-			{
-				
-				UGCUpdateHandle_t itemUpdateHandle = SteamUGC.StartItemUpdate(appId, PublishedFileId);
-				string title = modTitle.text;
-				//string modPath = "C:/test/New Unity Project/modId/slime_mod";
-				modinfo.modId = PublishedFileId.m_PublishedFileId;
-				if(SteamUGC.SetItemTitle(itemUpdateHandle, title))
-				{
-					modinfo.title = title;
-					Debug.Log("SetItemTitle: " + "OK");
-				}
-				if(SteamUGC.SetItemDescription(itemUpdateHandle, modDescription.text))
-				{
-					Debug.Log("SetItemDescription: " + "OK");
-				}
-				// if(SteamUGC.SetItemMetadata(itemUpdateHandle,"C:/test/New Unity Project/modId/slime_mod/mono5.png"))
-				// {
-				// 	Debug.Log("SetItemMetadata: " + "OK");
-				// }
-				if(SteamUGC.SetItemContent(itemUpdateHandle,path))
-				{
-					Debug.Log("SetItemContent: " + "OK");
-				}
-				// if(SteamUGC.SetItemPreview(itemUpdateHandle,"C:/test/New Unity Project/modId/slime_mod/mono5.png"))
-				// {
-				// 	Debug.Log("SetItemPreview: " + "OK");
-				// }
-				
-				CreateModInfo(modinfo);
-
-
-
-
-				SteamAPICall_t ItemUpdateResult = SteamUGC.SubmitItemUpdate(itemUpdateHandle, null);
-				m_itemUpdateResult.Set(ItemUpdateResult);
-			}
-			if(!findModId)
-			{
-				SteamAPICall_t handle = SteamUGC.CreateItem(appId,EWorkshopFileType.k_EWorkshopFileTypeCommunity);
-				m_CreateItemResult.Set(handle);
-			}
-		}
+		
 	}
 
+	public void SelectFolder()
+	{
+#if UNITY_EDITOR
+		modPath.text = path = EditorUtility.OpenFolderPanel("UploadMod","","");
+#else 
+		var FileDialog = new OpenFileDialog();
+		FileDialog.ShowDialog();
+		modPath.text = path = FileDialog.FileName;
+#endif
+		if( modPath.text != "" )
+		{
+			fideModInfo();
+		}
+	}
+	public void CreateAndUpload()
+	{
+		if(!findModInfo || !SteamManager.Initialized)
+		{
+			return;
+		}
+		NeedUpLoad = true;
+		if(!findModId)
+		{
+			SteamCreateItem();
+		}
+		if(findModId)
+		{
+			SteamUpLoadItem();
+		}
+	}
+	private void SteamCreateItem()
+	{
+		SteamAPICall_t handle = SteamUGC.CreateItem(appId,EWorkshopFileType.k_EWorkshopFileTypeCommunity);
+		m_CreateItemResult.Set(handle);
+	}
+
+	private void SteamUpLoadItem()
+	{
+		UGCUpdateHandle_t itemUpdateHandle = SteamUGC.StartItemUpdate(appId, PublishedFileId);
+		string title = modTitle.text;
+		//string modPath = "C:/test/New Unity Project/modId/slime_mod";
+		modinfo.modId = PublishedFileId.m_PublishedFileId;
+		if(SteamUGC.SetItemTitle(itemUpdateHandle, title))
+		{
+			modinfo.title = title;
+			Debug.Log("SetItemTitle: " + "OK");
+		}
+		if(SteamUGC.SetItemDescription(itemUpdateHandle, modDescription.text))
+		{
+			Debug.Log("SetItemDescription: " + "OK");
+		}
+		// if(SteamUGC.SetItemMetadata(itemUpdateHandle,"C:/test/New Unity Project/modId/slime_mod/mono5.png"))
+		// {
+		// 	Debug.Log("SetItemMetadata: " + "OK");
+		// }
+		if(SteamUGC.SetItemContent(itemUpdateHandle,path))
+		{
+			Debug.Log("SetItemContent: " + "OK");
+		}
+		// if(SteamUGC.SetItemPreview(itemUpdateHandle,"C:/test/New Unity Project/modId/slime_mod/mono5.png"))
+		// {
+		// 	Debug.Log("SetItemPreview: " + "OK");
+		// }
+	
+		CreateModInfo(modinfo);
+		NeedUpLoad = false;
+		SteamAPICall_t ItemUpdateResult = SteamUGC.SubmitItemUpdate(itemUpdateHandle, null);
+		m_itemUpdateResult.Set(ItemUpdateResult);
+	}
 	private void CreateItemId(CreateItemResult_t pCallback, bool bIOFailure) {
 		
 		Debug.Log("CreateItemResult: " + pCallback.m_eResult);
