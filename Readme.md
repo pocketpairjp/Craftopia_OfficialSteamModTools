@@ -1,6 +1,6 @@
-#CraftopiaのModアップロードツール
+# CraftopiaのModアップロードツール
 
-##Mod_Uploader.exeからのアップロード方法
+## Mod_Uploader.exeからのアップロード方法
 1. Mod_UploaderBinary/Version1.00のフォルダを開きます。
 2. Mod_Uploader.exeを起動します。
 3. Modを入れたファイルのパスを指定します。
@@ -9,7 +9,7 @@
 *steamでログインしている必要があります。
 
 
-##Unityからのアップロード方法
+## Unityからのアップロード方法
 対応Unityバージョン：2020.1.3
 1. Unityをダウンロードします。
 2. Mod_UploaderファイルをUnityで起動します。
