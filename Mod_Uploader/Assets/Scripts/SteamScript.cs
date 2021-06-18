@@ -31,6 +31,11 @@ public class SteamScript : MonoBehaviour
 	[SerializeField] TMP_InputField modPath;
 	[SerializeField] TMP_InputField modTitle;
 	[SerializeField] TMP_InputField modDescription;
+	[UnityEngine.SerializeField] TMP_Text SuccessLog;
+	[UnityEngine.SerializeField] TMP_Text NotSuccessLog;
+
+	[UnityEngine.SerializeField] TMP_Text LoginSuccessLog;
+	[UnityEngine.SerializeField] TMP_Text LoginNotSuccessLog;
 	bool findModInfo;
 	//string path = "";
 	string modInfoPath = "";
@@ -55,8 +60,16 @@ public class SteamScript : MonoBehaviour
 			m_itemUpdateResult = CallResult<SubmitItemUpdateResult_t>.Create(CheckItemUpdateResult);
 			m_addDependecyResult = CallResult<AddUGCDependencyResult_t>.Create(CheckDependencyResult);
 			appId.m_AppId = 1307550;
-			
+			LoginNotSuccessLog.enabled = false;
+			LoginSuccessLog.enabled = true;
 		}
+		else
+		{
+			LoginNotSuccessLog.enabled = true;
+			LoginSuccessLog.enabled = false;
+		}
+		SuccessLog.enabled = false;
+		NotSuccessLog.enabled = false;
 	}
 
 	private void fideModInfo()
@@ -127,6 +140,8 @@ public class SteamScript : MonoBehaviour
 		}
 		if(!findModInfo || !SteamManager.Initialized)
 		{
+			SuccessLog.enabled = false;
+			NotSuccessLog.enabled = true;
 			return;
 		}
 		NeedUpLoad = true;
@@ -215,6 +230,16 @@ public class SteamScript : MonoBehaviour
 	private void CheckItemUpdateResult(SubmitItemUpdateResult_t pCallback, bool bIODailure)
 	{
 		Debug.Log("UpdateItemResult: " + pCallback.m_eResult);
+		if(pCallback.m_eResult == EResult.k_EResultOK)
+		{
+			SuccessLog.enabled = true;
+			NotSuccessLog.enabled = false;
+		}
+		else
+		{
+			SuccessLog.enabled = false;
+			NotSuccessLog.enabled = true;
+		}
 		
 	}
 	private void CheckDependencyResult(AddUGCDependencyResult_t pCallback, bool bIODailure)
