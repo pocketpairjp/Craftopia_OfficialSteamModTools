@@ -32,7 +32,7 @@ public class SteamScript : MonoBehaviour
 	[SerializeField] TMP_InputField modTitle;
 	[SerializeField] TMP_InputField modDescription;
 	bool findModInfo;
-	string path = "";
+	//string path = "";
 	string modInfoPath = "";
 	bool findModId = false;
 	bool NeedUpLoad = false;
@@ -61,7 +61,7 @@ public class SteamScript : MonoBehaviour
 
 	private void fideModInfo()
 	{
-		modInfoPath = path+"/modInfo.txt";
+		modInfoPath = modPath.text+"/modInfo.txt";
 		if(!File.Exists(modInfoPath))
 		{
 			FileStream file = File.Create(modInfoPath);
@@ -106,13 +106,13 @@ public class SteamScript : MonoBehaviour
 	public void SelectFolder()
 	{
 #if UNITY_EDITOR
-		modPath.text = path = EditorUtility.OpenFolderPanel("UploadMod","","");
+		modPath.text = EditorUtility.OpenFolderPanel("UploadMod","","");
 #else 
 		OpenFileDialog FileDialog = new OpenFileDialog();
-		FileDialog.FileName = path;
+		FileDialog.FileName = modPath.text;
 		//modPath.text = FileDialog.FileName;
 		FileDialog.ShowDialog();
-		modPath.text = path = FileDialog.FileName;
+		modPath.text = FileDialog.FileName;
 #endif
 		if( modPath.text != "" )
 		{
@@ -121,6 +121,10 @@ public class SteamScript : MonoBehaviour
 	}
 	public void CreateAndUpload()
 	{
+		if( modPath.text != "" )
+		{
+			fideModInfo();
+		}
 		if(!findModInfo || !SteamManager.Initialized)
 		{
 			return;
@@ -165,7 +169,7 @@ public class SteamScript : MonoBehaviour
 		// {
 		// 	Debug.Log("SetItemMetadata: " + "OK");
 		// }
-		if(SteamUGC.SetItemContent(itemUpdateHandle,path))
+		if(SteamUGC.SetItemContent(itemUpdateHandle,modPath.text))
 		{
 			Debug.Log("SetItemContent: " + "OK");
 		}
@@ -200,11 +204,11 @@ public class SteamScript : MonoBehaviour
 	}
 	private void CreateModInfo(modInfo info)
 	{
-		if(File.Exists(path+"/modInfo.txt"))
+		if(File.Exists(modPath.text+"/modInfo.txt"))
 		{
 			info.modType = "mod";
 			string infoText = info.modId.ToString() + "\n" + info.title + "\n" + info.modType;
-			File.WriteAllText(path+"/modInfo.txt", infoText);
+			File.WriteAllText(modPath.text+"/modInfo.txt", infoText);
 		}
 	}
 
