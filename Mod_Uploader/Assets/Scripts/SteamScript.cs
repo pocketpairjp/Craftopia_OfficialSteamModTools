@@ -183,7 +183,7 @@ public class SteamScript : MonoBehaviour
 		NeedUpLoad = false;
 		SteamAPICall_t ItemUpdateResult = SteamUGC.SubmitItemUpdate(itemUpdateHandle, null);
 		m_itemUpdateResult.Set(ItemUpdateResult);
-		SteamAPICall_t addDependecyResult = SteamUGC.AddDependency(PublishedFileId,new PublishedFileId_t(2491629880));
+		SteamAPICall_t addDependecyResult = SteamUGC.AddDependency(PublishedFileId,new PublishedFileId_t(2519948110));
 		m_addDependecyResult.Set(addDependecyResult);
 	}
 	private void CreateItemId(CreateItemResult_t pCallback, bool bIOFailure) {
