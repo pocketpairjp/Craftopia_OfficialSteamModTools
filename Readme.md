@@ -1,6 +1,6 @@
 # Craftopia Mod Uploader Tool
 ## How to upload mods via Mod_Uploader.exe
-1. Open the directory named Mod_UploaderBinary/Version1.00
+1. Open the directory named Mod_UploaderBinary/Version1.01
 2. Launch Mod_Uploader.exe
 3. Specify the path to the directory containing mods
 4. Enter the title and the description of mods, and click Upload
@@ -18,7 +18,7 @@ Supported Unity version: 2020.1.3
 
 # CraftopiaのModアップロードツール
 ## Mod_Uploader.exeからのアップロード方法
-1. Mod_UploaderBinary/Version1.00のディレクトリを開きます。
+1. Mod_UploaderBinary/Version1.01のディレクトリを開きます。
 2. Mod_Uploader.exeを起動します。
 3. Modを入れたディレクトリのパスを指定します。
 4. タイトル、説明文を入力し、Uploadを押します。
