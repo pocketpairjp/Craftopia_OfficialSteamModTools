@@ -2656,10 +2656,13 @@ MonoBehaviour:
   modPath: {fileID: 258934856}
   modTitle: {fileID: 13057937}
   modDescription: {fileID: 121889529}
+  previewImagePath: {fileID: 393430009}
   SuccessLog: {fileID: 1032513780}
   NotSuccessLog: {fileID: 979486305}
   LoginSuccessLog: {fileID: 1116575258}
   LoginNotSuccessLog: {fileID: 1610775277}
+  UploadButton: {fileID: 282985671}
+  ResetButton: {fileID: 101962226}
 --- !u!4 &928873296
 Transform:
   m_ObjectHideFlags: 0

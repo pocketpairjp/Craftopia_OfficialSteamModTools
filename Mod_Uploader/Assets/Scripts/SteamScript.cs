@@ -199,7 +199,7 @@ public class SteamScript : MonoBehaviour
 			Debug.Log("SetItemContent: " + "OK");
 		}
 		
-		if(SteamUGC.SetItemPreview(itemUpdateHandle, previewImagePath.text))
+		if(SteamUGC.SetItemPreview(itemUpdateHandle, GetImagePath(previewImagePath.text)))
 		{
 			Debug.Log("SetItemPreview: " + "OK");
 		}
@@ -226,6 +226,29 @@ public class SteamScript : MonoBehaviour
 			CreateModInfo(modinfo);
 		}
 		
+	}
+	private String GetImagePath(string FolderPath)
+	{
+		if(FolderPath.EndsWith(".png") || FolderPath.EndsWith(".jpg"))
+		{
+			return FolderPath;
+		}
+		if(Directory.Exists(FolderPath))
+		{
+			string[] fileList = System.IO.Directory.GetFiles(FolderPath,"*.png");
+
+			if(fileList.Length > 0)
+			{
+				return fileList[0];
+			}
+			fileList = System.IO.Directory.GetFiles(FolderPath,"*.jpg");
+
+			if(fileList.Length > 0)
+			{
+				return fileList[0];
+			}
+		}
+		return "";
 	}
 	private void CreateModInfo(modInfo info)
 	{
