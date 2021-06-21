@@ -113,7 +113,7 @@ public class SteamScript : MonoBehaviour
 		{
 			SteamUpLoadItem();
 		}
-		
+	
 	}
 
 	public void SelectFolder()
@@ -247,6 +247,26 @@ public class SteamScript : MonoBehaviour
 		Debug.Log("AddDependencyResult: " + pCallback.m_eResult);
 		
 	}
+
+	public void ResetModsInfo()
+	{
+		SuccessLog.enabled = false;
+		NotSuccessLog.enabled = false;
+		
+		modPath.text = "";
+		modTitle.text = "";
+		modDescription.text = "";
+
+		modinfo.modId = 0;
+		modinfo.title = "";
+
+		modInfoPath = "";
+	
+		findModId = false;
+		findModInfo = false;
+	
+	}
+
 	public void QuitApp()
 	{
 #if UNITY_EDITOR
