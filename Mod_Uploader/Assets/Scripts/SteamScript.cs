@@ -31,11 +31,16 @@ public class SteamScript : MonoBehaviour
 	[SerializeField] TMP_InputField modPath;
 	[SerializeField] TMP_InputField modTitle;
 	[SerializeField] TMP_InputField modDescription;
+	[SerializeField] TMP_InputField previewImagePath;
 	[UnityEngine.SerializeField] TMP_Text SuccessLog;
 	[UnityEngine.SerializeField] TMP_Text NotSuccessLog;
 
 	[UnityEngine.SerializeField] TMP_Text LoginSuccessLog;
 	[UnityEngine.SerializeField] TMP_Text LoginNotSuccessLog;
+
+
+	[SerializeField] UnityEngine.UI.Button UploadButton;
+	[SerializeField] UnityEngine.UI.Button ResetButton;
 	bool findModInfo;
 	//string path = "";
 	string modInfoPath = "";
@@ -70,6 +75,9 @@ public class SteamScript : MonoBehaviour
 		}
 		SuccessLog.enabled = false;
 		NotSuccessLog.enabled = false;
+
+		UploadButton.gameObject.SetActive(true);
+		ResetButton.gameObject.SetActive(false);
 	}
 
 	private void fideModInfo()
@@ -113,6 +121,8 @@ public class SteamScript : MonoBehaviour
 		{
 			SteamUpLoadItem();
 		}
+
+		//WWW www = new WWW(previewImagePath.text);
 	
 	}
 
@@ -189,10 +199,10 @@ public class SteamScript : MonoBehaviour
 			Debug.Log("SetItemContent: " + "OK");
 		}
 		
-		// if(SteamUGC.SetItemPreview(itemUpdateHandle,"C:/test/New Unity Project/modId/slime_mod/mono5.png"))
-		// {
-		// 	Debug.Log("SetItemPreview: " + "OK");
-		// }
+		if(SteamUGC.SetItemPreview(itemUpdateHandle, previewImagePath.text))
+		{
+			Debug.Log("SetItemPreview: " + "OK");
+		}
 	
 		CreateModInfo(modinfo);
 		NeedUpLoad = false;
@@ -234,6 +244,9 @@ public class SteamScript : MonoBehaviour
 		{
 			SuccessLog.enabled = true;
 			NotSuccessLog.enabled = false;
+
+			UploadButton.gameObject.SetActive(false);
+			ResetButton.gameObject.SetActive(true);
 		}
 		else
 		{
@@ -256,7 +269,8 @@ public class SteamScript : MonoBehaviour
 		modPath.text = "";
 		modTitle.text = "";
 		modDescription.text = "";
-
+		previewImagePath.text = "";
+		
 		modinfo.modId = 0;
 		modinfo.title = "";
 
@@ -264,7 +278,8 @@ public class SteamScript : MonoBehaviour
 	
 		findModId = false;
 		findModInfo = false;
-	
+		UploadButton.gameObject.SetActive(true);
+		ResetButton.gameObject.SetActive(false);
 	}
 
 	public void QuitApp()
