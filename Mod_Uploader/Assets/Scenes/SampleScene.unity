@@ -329,7 +329,7 @@ RectTransform:
   m_Children:
   - {fileID: 916675504}
   m_Father: {fileID: 1896433147}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -758,6 +758,78 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 160935470}
   m_CullTransparentMesh: 0
+--- !u!1 &173937551
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 173937552}
+  - component: {fileID: 173937554}
+  - component: {fileID: 173937553}
+  m_Layer: 5
+  m_Name: RawImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &173937552
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173937551}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1896433147}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -124.55002}
+  m_SizeDelta: {x: 300, y: 150}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &173937553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173937551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!222 &173937554
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 173937551}
+  m_CullTransparentMesh: 0
 --- !u!1001 &256862714
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -861,7 +933,8 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 903ff4bbb8c70384ab84b36e3f0f6b9c, type: 3}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 8346879715483799265, guid: 76b2b7f76a5838a4289220071c9d3b61, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 76b2b7f76a5838a4289220071c9d3b61, type: 3}
 --- !u!224 &256862715 stripped
 RectTransform:
@@ -1120,7 +1193,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter Mod preview image path
+  m_text: C:/Users/Username/Documents/Mods/myMod/image.png
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4b3e298dcbc5bd84fba380653646c903, type: 2}
   m_sharedMaterial: {fileID: -7843738741801724956, guid: 4b3e298dcbc5bd84fba380653646c903, type: 2}
@@ -1229,7 +1302,7 @@ RectTransform:
   m_Children:
   - {fileID: 1270241169}
   m_Father: {fileID: 1896433147}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2189,7 +2262,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &521720690
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2203,7 +2276,7 @@ RectTransform:
   m_Children:
   - {fileID: 1362634155}
   m_Father: {fileID: 1896433147}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -2778,7 +2851,7 @@ RectTransform:
   m_Children:
   - {fileID: 1672113346}
   m_Father: {fileID: 1896433147}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2997,6 +3070,7 @@ MonoBehaviour:
   UploadButton: {fileID: 282985671}
   ResetButton: {fileID: 101962226}
   Uploading: {fileID: 766365910}
+  ModImage: {fileID: 173937553}
 --- !u!4 &928873296
 Transform:
   m_ObjectHideFlags: 0
@@ -4377,7 +4451,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter Mod directory path
+  m_text: C:/Users/Username/Documents/Mods/myMod
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4b3e298dcbc5bd84fba380653646c903, type: 2}
   m_sharedMaterial: {fileID: -7843738741801724956, guid: 4b3e298dcbc5bd84fba380653646c903, type: 2}
@@ -4910,6 +4984,7 @@ RectTransform:
   - {fileID: 393430008}
   - {fileID: 1146971923}
   - {fileID: 2034068854}
+  - {fileID: 173937552}
   - {fileID: 101962225}
   - {fileID: 282985670}
   - {fileID: 766365909}

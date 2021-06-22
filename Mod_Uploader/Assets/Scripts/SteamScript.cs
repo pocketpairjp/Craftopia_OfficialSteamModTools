@@ -45,11 +45,14 @@ public class SteamScript : MonoBehaviour
 	[SerializeField] UnityEngine.UI.Button UploadButton;
 	[SerializeField] UnityEngine.UI.Button ResetButton;
 	[SerializeField] UnityEngine.UI.Image Uploading;
+	[SerializeField] RawImage ModImage;
 	bool findModInfo;
 	//string path = "";
 	string modInfoPath = "";
 	bool findModId = false;
 	bool NeedUpLoad = false;
+
+	string ModImagePath;
 	//string modFilePath = path+"/modId1.txt";
 	PublishedFileId_t PublishedFileId;
 	private AppId_t appId;
@@ -127,8 +130,42 @@ public class SteamScript : MonoBehaviour
 			SteamUpLoadItem();
 		}
 
-		//WWW www = new WWW(previewImagePath.text);
+		if(File.Exists( GetImagePath(previewImagePath.text)))
+		{
+			SetImage( GetImagePath(previewImagePath.text));
+		}
+		else if(File.Exists(GetImagePath(modPath.text)))
+		{
+			SetImage(GetImagePath(modPath.text));
+		}
 	
+	}
+	void SetImage(string imagePath)
+	{
+		if(File.Exists(imagePath))
+		{
+			ModImagePath = imagePath;
+			byte[] TexData = File.ReadAllBytes(imagePath);
+			Texture2D tex = new Texture2D(100,100);
+			tex.LoadImage(TexData);
+			ModImage.texture = tex;
+			
+			// Vector2 size = new Vector2(tex.height,tex.width);
+			// if(size.x > 300f )
+			// {
+			// 	float tempX = 300f/size.x;
+			// 	size *= tempX;
+			// }
+			// if(size.y > 150f)
+			// {
+			// 	float tempY = 150f/size.y;
+			// 	size *= tempY;
+			// }
+			// Rect imgRect = new Rect(0,0,size.x,size.y);
+			// ModImage.SetClipRect(imgRect,true);
+			// //ModImage.SetClipSoftness(size);
+
+		}
 	}
 
 	public void SelectFolder()
@@ -137,11 +174,16 @@ public class SteamScript : MonoBehaviour
 //		modPath.text = EditorUtility.OpenFolderPanel("UploadMod","","");
 //#else 
 		OpenFileDialog File_Dialog = new OpenFileDialog();
+		//File_Dialog.Filter = "Folder|.";
+		File_Dialog.CheckFileExists = false;
 		File_Dialog.FileName = modPath.text;
-		
-		//modPath.text = File_Dialog.FileName;
 		File_Dialog.ShowDialog();
 		modPath.text = File_Dialog.FileName;
+
+		// FolderBrowserDialog File_Dialog = new FolderBrowserDialog();
+		// File_Dialog. = modPath.text;
+		// File_Dialog.ShowDialog();
+		// modPath.text = File_Dialog.FileName;
 //#endif
 		if( modPath.text != "" )
 		{
@@ -210,7 +252,7 @@ public class SteamScript : MonoBehaviour
 			Debug.Log("SetItemContent: " + "OK");
 		}
 		
-		if(SteamUGC.SetItemPreview(itemUpdateHandle, GetImagePath(previewImagePath.text)))
+		if(SteamUGC.SetItemPreview(itemUpdateHandle, ModImagePath))//GetImagePath(previewImagePath.text)))
 		{
 			Debug.Log("SetItemPreview: " + "OK");
 		}
@@ -317,6 +359,8 @@ public class SteamScript : MonoBehaviour
 		UploadButton.gameObject.SetActive(true);
 		ResetButton.gameObject.SetActive(false);
 		Uploading.gameObject.SetActive(false);
+
+		ModImagePath = "";
 	}
 
 	public void QuitApp()
