@@ -93,8 +93,12 @@ public class SteamScript : MonoBehaviour
 		modInfoPath = modPath.text+"/modInfo.txt";
 		if(!File.Exists(modInfoPath))
 		{
-			FileStream file = File.Create(modInfoPath);
-			file.Close();
+			if(Directory.Exists(modPath.text))
+			{
+
+				FileStream file = File.Create(modInfoPath);
+				file.Close();
+			}
 		}
 
 		if(File.Exists(modInfoPath))
@@ -329,6 +333,8 @@ public class SteamScript : MonoBehaviour
 		{
 			//SuccessLog.enabled = false;
 			NotSuccessLog.SetTrigger("Enter");
+			Uploading.gameObject.SetActive(false);
+			UploadButton.gameObject.SetActive(true);
 		}
 		
 	}
