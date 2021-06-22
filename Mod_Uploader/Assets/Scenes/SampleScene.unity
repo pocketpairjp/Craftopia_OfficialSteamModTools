@@ -681,7 +681,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Enter Mod title
+  m_text: Craftopia Mod
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 4b3e298dcbc5bd84fba380653646c903, type: 2}
   m_sharedMaterial: {fileID: -7843738741801724956, guid: 4b3e298dcbc5bd84fba380653646c903, type: 2}
