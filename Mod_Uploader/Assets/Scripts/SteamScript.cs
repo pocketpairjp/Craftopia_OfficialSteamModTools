@@ -32,8 +32,11 @@ public class SteamScript : MonoBehaviour
 	[SerializeField] TMP_InputField modTitle;
 	[SerializeField] TMP_InputField modDescription;
 	[SerializeField] TMP_InputField previewImagePath;
-	[UnityEngine.SerializeField] TMP_Text SuccessLog;
-	[UnityEngine.SerializeField] TMP_Text NotSuccessLog;
+	// [UnityEngine.SerializeField] TMP_Text SuccessLog;
+	// [UnityEngine.SerializeField] TMP_Text NotSuccessLog;
+
+	[UnityEngine.SerializeField] Animator SuccessLog;
+	[UnityEngine.SerializeField] Animator NotSuccessLog;
 
 	[UnityEngine.SerializeField] TMP_Text LoginSuccessLog;
 	[UnityEngine.SerializeField] TMP_Text LoginNotSuccessLog;
@@ -41,6 +44,7 @@ public class SteamScript : MonoBehaviour
 
 	[SerializeField] UnityEngine.UI.Button UploadButton;
 	[SerializeField] UnityEngine.UI.Button ResetButton;
+	[SerializeField] UnityEngine.UI.Image Uploading;
 	bool findModInfo;
 	//string path = "";
 	string modInfoPath = "";
@@ -73,11 +77,12 @@ public class SteamScript : MonoBehaviour
 			LoginNotSuccessLog.enabled = true;
 			LoginSuccessLog.enabled = false;
 		}
-		SuccessLog.enabled = false;
-		NotSuccessLog.enabled = false;
+		//SuccessLog.enabled = false;
+		//NotSuccessLog.enabled = false;
 
 		UploadButton.gameObject.SetActive(true);
 		ResetButton.gameObject.SetActive(false);
+		Uploading.gameObject.SetActive(false);
 	}
 
 	private void fideModInfo()
@@ -145,14 +150,18 @@ public class SteamScript : MonoBehaviour
 	}
 	public void CreateAndUpload()
 	{
+		Uploading.gameObject.SetActive(true);
+		UploadButton.gameObject.SetActive(false);
 		if( modPath.text != "" )
 		{
 			fideModInfo();
 		}
 		if(!findModInfo || !SteamManager.Initialized)
 		{
-			SuccessLog.enabled = false;
-			NotSuccessLog.enabled = true;
+			//SuccessLog.enabled = false;
+			NotSuccessLog.SetTrigger("Enter");
+			Uploading.gameObject.SetActive(false);
+			UploadButton.gameObject.SetActive(true);
 			return;
 		}
 		NeedUpLoad = true;
@@ -162,6 +171,7 @@ public class SteamScript : MonoBehaviour
 		}
 		if(findModId)
 		{
+			NotSuccessLog.SetTrigger("Exit");
 			SteamUpLoadItem();
 		}
 	}
@@ -266,16 +276,17 @@ public class SteamScript : MonoBehaviour
 		Debug.Log("UpdateItemResult: " + pCallback.m_eResult);
 		if(pCallback.m_eResult == EResult.k_EResultOK)
 		{
-			SuccessLog.enabled = true;
-			NotSuccessLog.enabled = false;
+			SuccessLog.SetTrigger("Enter");
 
 			UploadButton.gameObject.SetActive(false);
 			ResetButton.gameObject.SetActive(true);
+			Uploading.gameObject.SetActive(false);
+
 		}
 		else
 		{
-			SuccessLog.enabled = false;
-			NotSuccessLog.enabled = true;
+			//SuccessLog.enabled = false;
+			NotSuccessLog.SetTrigger("Enter");
 		}
 		
 	}
@@ -287,8 +298,9 @@ public class SteamScript : MonoBehaviour
 
 	public void ResetModsInfo()
 	{
-		SuccessLog.enabled = false;
-		NotSuccessLog.enabled = false;
+		
+		SuccessLog.SetTrigger("Exit");
+		NotSuccessLog.SetTrigger("Exit");
 		
 		modPath.text = "";
 		modTitle.text = "";
@@ -304,6 +316,7 @@ public class SteamScript : MonoBehaviour
 		findModInfo = false;
 		UploadButton.gameObject.SetActive(true);
 		ResetButton.gameObject.SetActive(false);
+		Uploading.gameObject.SetActive(false);
 	}
 
 	public void QuitApp()
