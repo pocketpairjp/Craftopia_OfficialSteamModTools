@@ -391,7 +391,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6878861188214056989, guid: 91fc1dbf0d8ad094db713650a6fb038b, type: 3}
       propertyPath: m_text
-      value: Mod Image Pass
+      value: Mod Image Path
       objectReference: {fileID: 0}
     - target: {fileID: 7048790556435717058, guid: 91fc1dbf0d8ad094db713650a6fb038b, type: 3}
       propertyPath: m_Name
@@ -5780,7 +5780,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6878861188214056989, guid: 91fc1dbf0d8ad094db713650a6fb038b, type: 3}
       propertyPath: m_text
-      value: Mod Pass
+      value: Mod Path
       objectReference: {fileID: 0}
     - target: {fileID: 7048790556435717058, guid: 91fc1dbf0d8ad094db713650a6fb038b, type: 3}
       propertyPath: m_Name
