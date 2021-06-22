@@ -128,15 +128,16 @@ public class SteamScript : MonoBehaviour
 
 	public void SelectFolder()
 	{
-#if UNITY_EDITOR
-		modPath.text = EditorUtility.OpenFolderPanel("UploadMod","","");
-#else 
-		OpenFileDialog FileDialog = new OpenFileDialog();
-		FileDialog.FileName = modPath.text;
-		//modPath.text = FileDialog.FileName;
-		FileDialog.ShowDialog();
-		modPath.text = FileDialog.FileName;
-#endif
+//#if UNITY_EDITOR
+//		modPath.text = EditorUtility.OpenFolderPanel("UploadMod","","");
+//#else 
+		OpenFileDialog File_Dialog = new OpenFileDialog();
+		File_Dialog.FileName = modPath.text;
+		
+		//modPath.text = File_Dialog.FileName;
+		File_Dialog.ShowDialog();
+		modPath.text = File_Dialog.FileName;
+//#endif
 		if( modPath.text != "" )
 		{
 			fideModInfo();
