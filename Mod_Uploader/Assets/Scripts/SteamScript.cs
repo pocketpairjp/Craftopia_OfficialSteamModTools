@@ -323,7 +323,7 @@ public class SteamScript : MonoBehaviour
 		if(pCallback.m_eResult == EResult.k_EResultOK)
 		{
 			SuccessLog.SetTrigger("Enter");
-
+			NotSuccessLog.SetTrigger("Exit");
 			UploadButton.gameObject.SetActive(false);
 			ResetButton.gameObject.SetActive(true);
 			Uploading.gameObject.SetActive(false);
@@ -333,6 +333,7 @@ public class SteamScript : MonoBehaviour
 		{
 			//SuccessLog.enabled = false;
 			NotSuccessLog.SetTrigger("Enter");
+			SuccessLog.SetTrigger("Exit");
 			Uploading.gameObject.SetActive(false);
 			UploadButton.gameObject.SetActive(true);
 		}
@@ -367,6 +368,7 @@ public class SteamScript : MonoBehaviour
 		Uploading.gameObject.SetActive(false);
 
 		ModImagePath = "";
+		ModImage.texture = new Texture2D(5,5);
 	}
 
 	public void QuitApp()
