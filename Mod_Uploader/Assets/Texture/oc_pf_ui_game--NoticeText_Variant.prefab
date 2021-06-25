@@ -104,8 +104,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u5E02\u5834\u306B\u51FA\u8377\u3057\u305F\u30A2\u30A4\u30C6\u30E0\u304C\u63DB\u91D1\u3055\u308C\u307E\u3057\u305F"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4b3e298dcbc5bd84fba380653646c903, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 0065f7017e77170448d07548967b9b5e, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 93cfd9eef3b92d345be980533463bd4e, type: 2}
+  m_sharedMaterial: {fileID: 2341488602432827926, guid: 93cfd9eef3b92d345be980533463bd4e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
