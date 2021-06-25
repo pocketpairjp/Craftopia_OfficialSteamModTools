@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0e77667b49707f042857e27a2ef6300d
+guid: 0e9ddff7163cd6d49b40f9025cb1fc41
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Roboto
+  - MotoyaLCedar
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
