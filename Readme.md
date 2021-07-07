@@ -34,3 +34,7 @@ Supported Unity version: 2020.1.3
 
 *Steamにログインしている必要があります。
 
+## Credits
+Steamworks.NET　-  [LICENSE](https://github.com/rlabrecque/Steamworks.NET/blob/master/LICENSE.txt)
+
+
